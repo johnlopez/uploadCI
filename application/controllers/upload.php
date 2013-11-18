@@ -16,10 +16,39 @@ class Upload extends CI_Controller {
 
     //FUNCIÓN PARA SUBIR LA IMAGEN Y VALIDAR EL TÍTULO
     function do_upload() {
+        /*
+        validacion titulo
+
         $this->form_validation->set_rules('titulo', 'titulo', 'required|min_length[5]|max_length[10]|trim|xss_clean');
+        */
+        $this->form_validation->set_rules('titulo','titulo','trim|required|xss_clean|max_lenght[50]|min_length[2]');
+        
+        $this->form_validation->set_rules('autor','autor','trim|required|xss_clean|max_lenght[50]|min_length[2]');
+        /*
+        validacion para un Email
+        
+        $this->form_validation->set_rules('titulo','titulo','trim|valid_email|required|xss_clean');*/
+
+        $this->form_validation->set_rules('descripcion','descripcion','trim|required|xss_clean|max_lenght[250]|min_length[2]');
+        $this->form_validation->set_rules('resumen','resumen','trim|required|xss_clean');
+
+        //validamos que se introduzcan los campos requeridos con la función de ci required
+        $this->form_validation->set_message('required', 'Campo %s es obligatorio');
+        //validamos el email con la función de ci valid_email
+        $this->form_validation->set_message('valid_email', 'El %s no es v&aacute;lido');
+        //comprobamos que se cumpla el mínimo de caracteres introducidos
+        $this->form_validation->set_message('min_length', 'Campo %s debe tener al menos %s car&aacute;cteres');
+        //comprobamos que se cumpla el máximo de caracteres introducidos
+        $this->form_validation->set_message('max_length', 'Campo %s debe tener menos %s car&aacute;cteres');
+
+
+        /*
+
         $this->form_validation->set_message('required', 'El %s no puede ir vacío!');
         $this->form_validation->set_message('min_length', 'El %s debe tener al menos %s carácteres');
         $this->form_validation->set_message('max_length', 'El %s no puede tener más de %s carácteres');
+        */
+
         //SI EL FORMULARIO PASA LA VALIDACIÓN HACEMOS TODO LO QUE SIGUE
         if ($this->form_validation->run() == TRUE) 
         {
@@ -42,9 +71,25 @@ class Upload extends CI_Controller {
             //ASÍ YA TENEMOS LA IMAGEN REDIMENSIONADA
             $this->_create_thumbnail($file_info['file_name']);
             $data = array('upload_data' => $this->upload->data());
+            
+
             $titulo = $this->input->post('titulo');
+            $autor = $this->input->post('autor');    
+            $descripcion = $this->input->post('descripcion');                            
+            $resumen = $this->input->post('resumen');
+            $archivo = $this->input->post('archivo');
+            //conseguimos la hora de nuestro país, en mi caso españa
+            date_default_timezone_set("Chile/Continental");
+            $fecha = date('Y-m-d');
+            $hora= date("H:i:s");
+
             $imagen = $file_info['file_name'];
-            $subir = $this->upload_model->subir($titulo,$imagen);      
+            
+
+            $subir = $this->upload_model->subir($titulo,$imagen,$autor,$descripcion,$resumen,$fecha,$hora);      
+            
+
+
             $data['titulo'] = $titulo;
             $data['imagen'] = $imagen;
             $this->load->view('imagen_subida_view', $data);
