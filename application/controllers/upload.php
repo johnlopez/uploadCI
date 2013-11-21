@@ -53,7 +53,7 @@ class Upload extends CI_Controller {
         if ($this->form_validation->run() == TRUE) 
         {
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|png|pdf';
         $config['max_size'] = '2000';
         $config['max_width'] = '2024';
         $config['max_height'] = '2008';

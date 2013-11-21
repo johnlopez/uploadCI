@@ -30,7 +30,7 @@
 </head>
 <body>
 <!--mostramos la información de la imagen-->
-<h3>Tu imagen fué subida correctamente!</h3>
+<h3>Archivo subido correctamente!</h3>
 <div id="info_subida">
 <ul>
 <?php foreach ($upload_data as $item => $value):?>
@@ -38,7 +38,7 @@
 <?php endforeach; ?>
 </ul>
 </div>
-<p><?php echo anchor('upload', 'Sigue subiendo archivos!!'); ?></p>
+<p><?php echo anchor('upload', 'Subir mas Archivos'); ?></p>
 <!--mostramos la imagen subida-->
 <div id="imagenes">
     <h3><?=$titulo?></h3>
