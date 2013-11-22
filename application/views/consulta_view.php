@@ -1,31 +1,9 @@
 
-<!-- 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin t&iacute;tulo</title>
-<style>
-    
-</style>
-</head>
-
-<body>
-    <!$ERROR MUESTRA LOS ERRORES QUE PUEDAN HABER AL SUBIR LA IMAGEN-->
-    
-
-
-<!--
-</body>
-</html>
--->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Portal Tesis Utem</title>
+<title><?= $titulo;?></title>
 <!--The below script Makes IE understand the new html5 tags are there and applies our CSS to it -->
 <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -297,158 +275,40 @@ footer a {
     <h1>Titulo 1</h1>
     <p> 
 
+        <?php 
+            
+            if($files){
+                echo heading('Archivo(s) disponible(s) para descargar', 3);
 
-        <?php
-        echo form_open('formulario');
+           foreach ($datos as $fila){
+                    
+                    
+                    foreach($files as $file){
 
-        $datos = array(
-              'name'        => 'username',
-              'id'          => 'username',
-              'value'       => '',
-              'maxlength'   => '8',
-              'size'        => '50',
-              'style'       => 'width:50%',
-            );
+                        if ($fila->ruta == $file) {
+                            echo anchor('files/downloads/'.$file, $file).br(1); 
+                        }
+                               
+                        
+                              
+                    }                  
+            }
+                      
+            echo br(1).anchor('files', 'Subir otro archivo');    
+            }else{
 
-        echo form_input($datos);
-        echo form_close();
+            echo heading('No hay archivos para descargar', 3).anchor('files', 'Subir un Archivo');
+
+            } 
+   
         ?>
-
-
-
+   
 
 
 
     </p> 
 
-<?=@$error?>
-<span><?php echo validation_errors(); ?></span>
-<?=form_open_multipart(base_url().'upload/do_upload');
-//aqui se procesará nuestro formulario, controlador comentarios, función insertar_comentarios
-//creamos los arrays que compondran nuestro formulario
-//primer array con el input que se llamará nombre y será donde introduciremos el mismo
-    $titulo = array(
-        'name' => 'titulo',
-        'id' => 'titulo',
-        'size' => '50',
-        'style' => 'width:50%',
-        'value' => set_value('titulo') // con esto al procesar el formulario de forma incorrecta quedará guardado el dato que le habíamos puesto
-    );
-    $autor = array(
-        'name' => 'autor',
-        'id' => 'autor',
-        'size' => '50',
-        'style' => 'width:50%',
-        'value' => set_value('autor') // con esto al procesar el formulario de forma incorrecta quedará guardado el dato que le habíamos puesto
-    );
-    $descripcion = array(
-        'name' => 'descripcion',
-        'id' => 'descripcion',
-        'size' => '50',
-        'style' => 'width:50%',
-        'value' => set_value('descripcion')
-    );
- 
-//el cuarto...(campo mensaje)
-    $resumen = array(
-        'name' => 'resumen',
-        'id' => 'resumen',
-        'rows' => 10,
-        'cols' => 40,
-        'value' => set_value('resumen')
-    );
-//el segundo array(campo email)
- 
-   
-    $userfile = array(
-        'name' => 'userfile',
-        'id' => 'userfile',
-        'rows' => 10,
-        'cols' => 40,
-        'value' => set_value('userfile')
-    );
- 
-//el botón submit de nuestro formulario
-    $submit = array(
-        'name' => 'submit',
-        'id' => 'submit',
-        'value' => 'Subir Tesis',
-        'title' => 'Subir Tesis'
-    );
-    ?>
-<?php
-echo form_fieldset('Ingreso Tesis');
-?>
-            <table>
-                <tr>
-                    <td>
-                        <?php echo form_label('Titulo: '); ?>
-                    </td>
-                    <td>
-                        <?php echo form_input($titulo); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo form_label('Autor: '); ?>
-                    </td>
-                    <td>
-                        <?php echo form_input($autor); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo form_label('Descripcion: '); ?>
-                    </td>
-                    <td>
-                        <?php echo form_input($descripcion); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <?php echo form_label('Resumen: '); ?>
-                    </td>
-                    <td>
-                        <?php echo form_textarea($resumen); ?>
-                    </td>
-                </tr>
-                <tr>
-                <tr>
-                    <td>
-                        <?php echo form_label('Archivo: '); ?>
-                    </td>
-                    <td>
-                        <?php echo form_upload($userfile); ?>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>
- 
-                    </td>
-                    <td>
-<!--con la funcion validation_errors ci nos muestra los errores al pulsar el botón submit, la podemos colocar donde queramos-->
-                  <font color="red" style="font-weight: bold; font-size: 14px; text-decoration: underline"><?php echo validation_errors(); ?></font>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
- 
-                    </td>
-                    <td>
-                        <?php echo form_submit($submit);
-                        //nuestro boton submit
-                        ?>
-                    </td>
-                </tr>
-                <?php
-                echo form_close();
-                ?>
-        </table>
-        <?php
-               echo form_fieldset_close();
-       ?>
-
+22222222222222222222
     </p>
     <h2>Titulo 2</h2>
     <p>3
@@ -469,7 +329,16 @@ echo form_fieldset('Ingreso Tesis');
         3
         3</p>
     <p>4
-        <a href="/uploads/Guia_de_Ejercicios_con_Nota.pdf" download="Guia_de_Ejercicios_con_Nota.pdf">Download PDF</a></p>
+        4
+        4
+        4
+        4
+        4
+        4
+        4
+        4
+        4
+        4</p>
     <h3>Titulo 3</h3>
     <p>5
         5

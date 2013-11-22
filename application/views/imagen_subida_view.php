@@ -29,12 +29,15 @@
 </style>
 </head>
 <body>
+
+
 <!--mostramos la información de la imagen-->
 <h3>Archivo subido correctamente!</h3>
 <div id="info_subida">
 <ul>
 <?php foreach ($upload_data as $item => $value):?>
-<li><?php echo $item;?>: <?php echo $value;?></li>
+<li><?php echo $item;?>:<a href="<?php echo $value;?>">descargar</a></li>
+ <br />
 <?php endforeach; ?>
 </ul>
 </div>
