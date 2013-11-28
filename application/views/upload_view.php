@@ -452,7 +452,7 @@ echo form_fieldset('Ingreso Tesis');
     </p>
     <h2>Titulo 2</h2>
     <p>3
-        por aka paso el loco pepe
+        por aka paso el loco john
         3<a href="#">link</a> 3
         3
         3
